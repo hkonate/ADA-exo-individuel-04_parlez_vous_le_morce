@@ -70,8 +70,23 @@ const encode = (txt) => {
     )
       encodeTxt.push(translateLatinCharacter(upperCaseTxt[i]));
   }
-  return encodeTxt;
+  return encodeTxt.join("");
 };
+// Step 4
+const getMorseCharacterList = (str) => str.split("/");
+const translateMorseCharacter = (char) => morseToLatin[char];
+
+const decode = (txt) => {
+  const keys = Object.keys(morseToLatin);
+  const splitTxt = getMorseCharacterList(txt);
+  const decodeTxt = [];
+  for (i = 0; i < splitTxt.length; i++) {
+    decodeTxt.push(translateMorseCharacter(splitTxt[i]));
+  }
+  return decodeTxt.join("");
+};
+
 console.log(getLatinCharacterList("Hello, world"));
 console.log(translateLatinCharacter("A"));
 console.log(encode("Hello, world"));
+console.log(decode("--/---/-/---"));
