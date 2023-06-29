@@ -61,8 +61,10 @@ const getLatinCharacterList = (str) => str.split("");
 const translateLatinCharacter = (char) => latinToMorse[char];
 // Step 3
 const encode = (txt) => {
-  const upperCaseTxt = getLatinCharacterList(txt.toUpperCase());
+  const input = document.querySelector("#latin input");
+  const upperCaseTxt = getLatinCharacterList(input.value.toUpperCase());
   const encodeTxt = [];
+  const p = document.querySelector("#latin p");
   for (i = 0; i < upperCaseTxt.length; i++) {
     if (
       upperCaseTxt.join("").charCodeAt(i) >= 65 &&
@@ -70,23 +72,27 @@ const encode = (txt) => {
     )
       encodeTxt.push(translateLatinCharacter(upperCaseTxt[i]));
   }
-  return encodeTxt.join("");
+  p.innerText = encodeTxt.join("");
 };
 // Step 4
 const getMorseCharacterList = (str) => str.split("/");
 const translateMorseCharacter = (char) => morseToLatin[char];
 
-const decode = (txt) => {
-  const keys = Object.keys(morseToLatin);
-  const splitTxt = getMorseCharacterList(txt);
+const decode = () => {
+  const input = document.querySelector("#morse input");
+  const splitTxt = getMorseCharacterList(input.value);
+  console.log(splitTxt);
+  const p = document.querySelector("#morse p");
+
   const decodeTxt = [];
   for (i = 0; i < splitTxt.length; i++) {
     decodeTxt.push(translateMorseCharacter(splitTxt[i]));
   }
-  return decodeTxt.join("");
+  p.innerText = decodeTxt.join("");
 };
 
-console.log(getLatinCharacterList("Hello, world"));
-console.log(translateLatinCharacter("A"));
-console.log(encode("Hello, world"));
-console.log(decode("--/---/-/---"));
+// console.log(getLatinCharacterList("Hello, world"));
+// console.log(translateLatinCharacter("A"));
+// console.log(encode("Hello, world"));
+// console.log(decode("--/---/-/---"));
+//step 5 done
